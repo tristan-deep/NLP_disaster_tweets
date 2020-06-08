@@ -44,7 +44,7 @@ class LoadTweets(keras.utils.Sequence):
 
         # Generate data
         X, y = self.__data_generation(list_IDs_temp)
-
+        
         return X, y
 
     def on_epoch_end(self):
@@ -65,12 +65,17 @@ class LoadTweets(keras.utils.Sequence):
              'location' : data.location.to_list(),
              'text'     : data.text.to_list()}
         
-        y = data.target.to_list()
-
-        return X, keras.utils.to_categorical(y, num_classes=self.n_classes)
+        if self.split == 'train' :
+            y = data.target.to_list()
+            y = keras.utils.to_categorical(y, num_classes=self.n_classes)
+        elif self.split == 'test' :
+            # for test set there are no labels
+            y = None
+            
+        return X, y
     
 if __name__ == '__main__' :
-    gen = LoadTweets(split='train', batch_size=32, shuffle=True)
+    gen = LoadTweets(split='test', batch_size=32, shuffle=True)
     
     # example that prints all the tweets of the first batch 
     batch = gen[0] # first of len(gen) batches
