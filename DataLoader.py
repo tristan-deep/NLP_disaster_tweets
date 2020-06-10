@@ -18,11 +18,12 @@ from pathlib import Path
 
 class LoadTweets(keras.utils.Sequence):
     'Generates data for Keras'
-    def __init__(self, split, batch_size=32, n_classes=2, shuffle=True):
+    def __init__(self, split, batch_size=32, n_classes=2, shuffle=True, text_only=False):
         'Initialization'
         self.batch_size = batch_size
         self.split = split
         self.n_classes = n_classes
+        self.text_only = text_only
         self.shuffle = shuffle
         self.data = pd.read_csv(Path('dataset', self.split + '.csv'))
         # not using ids but rather rows in csv file for convenience
@@ -44,6 +45,9 @@ class LoadTweets(keras.utils.Sequence):
 
         # Generate data
         X, y = self.__data_generation(list_IDs_temp)
+        
+        if self.text_only == True :
+            return X['text']
         
         return X, y
 
