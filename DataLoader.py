@@ -69,11 +69,13 @@ class LoadTweets(keras.utils.Sequence):
 
         if self.split == 'train':
             y = data.target.to_list()
+            y = [np.expand_dims(y, axis=1)]
             #y = keras.utils.to_categorical(y, num_classes=self.n_classes)
         elif self.split == 'test':
             # for test set there are no labels
             y = None
-        return X_pad, [np.expand_dims(y, axis=1)]
+            
+        return X_pad, y
 
 def tokenizer_tweets(max_words=10000):
   data = pd.read_csv(Path('dataset', 'train' + '.csv'))
