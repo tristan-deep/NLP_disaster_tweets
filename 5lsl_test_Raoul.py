@@ -6,13 +6,9 @@ import os
 import numpy as np
 
 
-#Make a folder to save model weights, and
-logdir = "logs"
-run = datetime.now().strftime("%Y%m%d-%H%M%S")
+logdir = '\logs'
 
-#check if the directory to save the model in exists
-os.makedirs(os.path.dirname(logdir+'/'), exist_ok=True)
-tensorboard_callback = TensorBoard(log_dir=logdir+"\\"+run)
+tensorboard_callback = TensorBoard(log_dir=logdir)
 
 """Create model"""
 max_words = 10000
@@ -24,7 +20,5 @@ tokenizer = tokenizer_tweets(max_words)
 gen = LoadTweets(tokenizer, split='train', batch_size = 32, shuffle=False, max_length=max_length)
 model = create_model(max_words, embedding_vecor_length, max_length, lstm_out)
 
-
-
 """## Train model"""
-model.fit(gen, epochs=10, callbacks = [tensorboard_callback])
+model.fit(gen, epochs=1, callbacks = [tensorboard_callback])
