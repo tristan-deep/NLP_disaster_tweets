@@ -13,13 +13,17 @@ class LoadTweets(keras.utils.Sequence):
 
     def __init__(self, split, batch_size=32, n_classes=2, shuffle=True, max_words = 10000, max_length=500):
         'Initialization'
-        self.max_words = max_words
-        self.tokenizer = tokenizer_tweets(max_words)
         self.batch_size = batch_size
         self.split = split
         self.n_classes = n_classes
         self.shuffle = shuffle
         self.data = pd.read_csv(Path('dataset', self.split + '.csv'))
+        self.all_text = self.data.text.to_list()
+
+        # Train the tokenizer to the texts
+        self.tokenizer = Tokenizer(num_words=max_words, filters='#$%&()*+-<=>@[\\]^_`{|}~\t\n', lower=False, split=" ")
+        self.tokenizer.fit_on_texts(self.all_text)
+
         # not using ids but rather rows in csv file for convenience
         self.list_IDs = list(range(len(self.data)))
 
@@ -78,28 +82,15 @@ class LoadTweets(keras.utils.Sequence):
             
         return X_pad, y
 
-def tokenizer_tweets(max_words=10000):
-  data = pd.read_csv(Path('dataset', 'train' + '.csv'))
-  list_IDs = list(range(len(data)))
-  all_text = data.text.to_list()
-
-  # Create Tokenizer Object
-  tokenizer = Tokenizer(num_words=max_words, filters='#$%&()*+-<=>@[\\]^_`{|}~\t\n', lower=False, split=" ")
-
-  # Train the tokenizer to the texts
-  tokenizer.fit_on_texts(all_text)
-
-  return tokenizer
-
 if __name__ == '__main__':
     max_words =10000
     max_length = 500
-    tokenizer = tokenizer_tweets(max_words)
-    gen = LoadTweets(tokenizer, split='train', batch_size=1, shuffle=False, max_length=max_length)
+
+    gen = LoadTweets(split='train', batch_size=1, shuffle=False, max_words = max_words, max_length=max_length)
 
     # example that prints all the tweets of the first batch
     batch = gen[0]  # first of len(gen) batches
 
     X = batch[0]  # 0 -> keywords/location/text, 1 -> target
-    text_first_batch = tokenizer.sequences_to_texts(X)
+    text_first_batch = gen.tokenizer.sequences_to_texts(X)
     print(text_first_batch)

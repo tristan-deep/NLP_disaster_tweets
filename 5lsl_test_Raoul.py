@@ -1,4 +1,4 @@
-from DataLoader import LoadTweets, tokenizer_tweets
+from DataLoader import LoadTweets
 from models.LSTM_model import create_model
 from datetime import datetime
 from tensorflow.keras.callbacks import TensorBoard
