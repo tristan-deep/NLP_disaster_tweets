@@ -22,10 +22,11 @@ max_length = 500
 max_words = 10000
 embedding_vecor_length = 32
 lstm_out = 100
-gen = LoadTweets(split='train', batch_size = 32, shuffle=False, max_words = max_words, max_length=max_length)
+train_gen = LoadTweets(split='train', batch_size = 32, shuffle=False, max_words = max_words, max_length=max_length)
+val_gen = LoadTweets(split='val', batch_size = 32, shuffle=False, max_words = max_words, max_length=max_length)
 model = create_model(max_words, embedding_vecor_length, max_length, lstm_out)
 
 
 
 """## Train model"""
-model.fit(gen, epochs=1, callbacks = [tensorboard_callback])
+model.fit(train_gen, validation_data = val_gen, epochs=100, callbacks = [tensorboard_callback])

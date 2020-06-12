@@ -17,7 +17,7 @@ class LoadTweets(keras.utils.Sequence):
         self.split = split
         self.n_classes = n_classes
         self.shuffle = shuffle
-        self.data = pd.read_csv(Path('dataset', self.split + '.csv'))
+        self.data = pd.read_csv(Path('dataset', self.split + '_set.csv'))
         self.all_text = self.data.text.to_list()
 
         # Train the tokenizer to the texts
@@ -76,6 +76,10 @@ class LoadTweets(keras.utils.Sequence):
             y = data.target.to_list()
             y = [np.expand_dims(y, axis=1)]
             #y = keras.utils.to_categorical(y, num_classes=self.n_classes)
+        elif self.split == 'val':
+            y = data.target.to_list()
+            y = [np.expand_dims(y, axis=1)]
+            # y = keras.utils.to_categorical(y, num_classes=self.n_classes)
         elif self.split == 'test':
             # for test set there are no labels
             y = None
