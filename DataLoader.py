@@ -11,9 +11,10 @@ from tensorflow.keras.preprocessing.text import Tokenizer
 class LoadTweets(keras.utils.Sequence):
     'Generates data for Keras'
 
-    def __init__(self, tokenizer, split, batch_size=32, n_classes=2, shuffle=True, max_length=500):
+    def __init__(self, split, batch_size=32, n_classes=2, shuffle=True, max_words = 10000, max_length=500):
         'Initialization'
-        self.tokenizer = tokenizer
+        self.max_words = max_words
+        self.tokenizer = tokenizer_tweets(max_words)
         self.batch_size = batch_size
         self.split = split
         self.n_classes = n_classes
