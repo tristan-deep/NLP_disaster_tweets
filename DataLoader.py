@@ -7,13 +7,13 @@ from pathlib import Path
 from tensorflow.keras.preprocessing import sequence
 from tensorflow.keras.preprocessing.text import Tokenizer
 
-def TokenizeTweets(max_words=10000):
+def TokenizeTweets(vocabulary_size=10000):
   data = pd.read_csv(Path('dataset', 'train' + '_set.csv'))
   list_IDs = list(range(len(data))) 
   all_text = data.text.to_list()
 
   # Create Tokenizer Object
-  tokenizer = Tokenizer(num_words=max_words, filters='#$%&()*+-<=>@[\\]^_`{|}~\t\n', lower=False, split=" ")
+  tokenizer = Tokenizer(num_words=vocabulary_size, filters='#$%&()*+-<=>@[\\]^_`{|}~\t\n', lower=False, split=" ")
 
   # Train the tokenizer to the texts (training data)
   tokenizer.fit_on_texts(all_text)
@@ -23,7 +23,7 @@ def TokenizeTweets(max_words=10000):
 class LoadTweets(keras.utils.Sequence):
     'Generates data for Keras'
 
-    def __init__(self, tokenizer, split, batch_size=32, n_classes=2, shuffle=True, max_words = 10000, max_length=500):
+    def __init__(self, tokenizer, split, batch_size=32, n_classes=2, shuffle=True, vocabulary_size = 10000, max_length=500):
         'Initialization'
         self.batch_size = batch_size
         self.split = split
@@ -38,7 +38,7 @@ class LoadTweets(keras.utils.Sequence):
         # not using ids but rather rows in csv file for convenience
         self.list_IDs = list(range(len(self.data)))
 
-        self.max_length = max_length
+        self.vocabulary_size = vocabulary_size
 
         self.on_epoch_end()
 
@@ -81,7 +81,7 @@ class LoadTweets(keras.utils.Sequence):
         # Convert list of strings into list of lists of integers
         X_sequences = self.tokenizer.texts_to_sequences(X_text)
         # Truncate and pad input sequences
-        X_pad = sequence.pad_sequences(X_sequences, maxlen=self.max_length)
+        X_pad = sequence.pad_sequences(X_sequences, maxlen=self.vocabulary_size)
 
         if self.split == 'train':
             y = data.target.to_list()
@@ -98,10 +98,11 @@ class LoadTweets(keras.utils.Sequence):
         return X_pad, y
 
 if __name__ == '__main__':
-    max_words =10000
+    vocabulary_size =10000
     max_length = 500
+    tokenizer = TokenizeTweets(vocabulary_size)
 
-    gen = LoadTweets(split='train', batch_size=1, shuffle=False, max_words = max_words, max_length=max_length)
+    gen = LoadTweets(tokenizer, split='train', batch_size=1, shuffle=False, vocabulary_size = vocabulary_size, max_length=max_length)
 
     # example that prints all the tweets of the first batch
     batch = gen[0]  # first of len(gen) batches
