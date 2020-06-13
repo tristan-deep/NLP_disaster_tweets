@@ -7,7 +7,7 @@
                     
 ==============================================================================
 """
-from DataLoader import LoadTweets, tokenizer_tweets
+from DataLoader import LoadTweets, TokenizeTweets
 
 import tensorflow.keras as keras
 from pathlib import Path
@@ -52,20 +52,24 @@ def create_submission(file, predictions, save_to_file=True) :
 
 if __name__ == '__main__' :
     
-    model_name = 'lstm_embedding-32_out-100_epochs-5.h5'
+    model_name = 'lstm_embedding-100_out-100-epochs-15.h5'
     
     model = import_model(file=model_name)
     
     # get data from test set
     test_set_size = 3263 # amount of tweets in testset
-    max_length=500
-    max_words=10000
     
-    tokenizer = tokenizer_tweets(max_words)
+    # Ideally set to test_set_size. If this does not fit into memory (OOM) try lower. 
+    # But has to fit exactly otherwise keras skipps the remainder. batch_size=1 will take forever.
+    batch_size = 1  # = test_set_size
+    max_length=100
+    vocabulary_size=1000
+    
+    tokenizer = TokenizeTweets(vocabulary_size)
     gen = LoadTweets(tokenizer, split='test', batch_size = test_set_size, shuffle=False, max_length=max_length)
     
     predictions_raw = model.predict(gen)
     
     predictions = np.squeeze((predictions_raw > 0.5).astype(int))
     
-    create_submission(file='submission_test1.csv', predictions=predictions)
+    create_submission(file='submission_test2.csv', predictions=predictions)

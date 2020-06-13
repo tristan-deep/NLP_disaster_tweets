@@ -7,13 +7,13 @@ from pathlib import Path
 from tensorflow.keras.preprocessing import sequence
 from tensorflow.keras.preprocessing.text import Tokenizer
 
-def TokenizeTweets(max_words=10000):
+def TokenizeTweets(vocabulary_size=10000):
   data = pd.read_csv(Path('dataset', 'train' + '_set.csv'))
   list_IDs = list(range(len(data))) 
   all_text = data.text.to_list()
 
   # Create Tokenizer Object
-  tokenizer = Tokenizer(num_words=max_words, filters='#$%&()*+-<=>@[\\]^_`{|}~\t\n', lower=False, split=" ")
+  tokenizer = Tokenizer(num_words=vocabulary_size, filters='#$%&()*+-<=>@[\\]^_`{|}~\t\n', lower=False, split=" ")
 
   # Train the tokenizer to the texts (training data)
   tokenizer.fit_on_texts(all_text)
@@ -98,11 +98,11 @@ class LoadTweets(keras.utils.Sequence):
         return X_pad, y
 
 if __name__ == '__main__':
-    max_words =10000
+    vocabulary_size =10000
     max_length = 500
-    tokenizer = TokenizeTweets(max_words=max_words)
+    tokenizer = TokenizeTweets(vocabulary_size)
 
-    gen = LoadTweets(tokenizer, split='train', batch_size=1, shuffle=False, max_words = max_words, max_length=max_length)
+    gen = LoadTweets(tokenizer, split='train', batch_size=1, shuffle=False, vocabulary_size = vocabulary_size, max_length=max_length)
 
     # example that prints all the tweets of the first batch
     batch = gen[0]  # first of len(gen) batches

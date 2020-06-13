@@ -28,7 +28,7 @@ if __name__ == '__main__' :
 
     embedding_vecor_length = 100
     lstm_out = 100
-    tokenizer = TokenizeTweets(max_words=vocabulary_size)
+    tokenizer = TokenizeTweets(vocabulary_size=vocabulary_size)
     
     train_gen = LoadTweets(tokenizer, split='train',
                            batch_size = 32, shuffle=False,
