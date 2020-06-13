@@ -10,8 +10,9 @@ import numpy as np
 
 
 if __name__ == '__main__' :
-    model_name = 'lstm_embedding-100_out-100-epochs-15'
-    b
+    save_model = True
+    model_name = 'lstm_embedding-100_out-100-epochs-15.h5'
+    
     #Make a folder to save model weights, and
     run = datetime.now().strftime("%Y%m%d-%H%M%S")
     logdir = Path("logs/"+run)
@@ -43,5 +44,5 @@ if __name__ == '__main__' :
     model.fit(train_gen, validation_data = val_gen, epochs=15, callbacks = [tensorboard_callback])
     
     if save_model == True :
-        PATH = Path('weights', model_name)
+        PATH = os.path.join('weights', model_name)
         model.save(PATH)
