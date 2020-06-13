@@ -23,7 +23,7 @@ def TokenizeTweets(max_words=10000):
 class LoadTweets(keras.utils.Sequence):
     'Generates data for Keras'
 
-    def __init__(self, tokenizer, split, batch_size=32, n_classes=2, shuffle=True, max_words = 10000, max_length=500):
+    def __init__(self, tokenizer, split, batch_size=32, n_classes=2, shuffle=True, vocabulary_size = 10000, max_length=500):
         'Initialization'
         self.batch_size = batch_size
         self.split = split
@@ -38,7 +38,7 @@ class LoadTweets(keras.utils.Sequence):
         # not using ids but rather rows in csv file for convenience
         self.list_IDs = list(range(len(self.data)))
 
-        self.max_length = max_length
+        self.vocabulary_size = vocabulary_size
 
         self.on_epoch_end()
 
@@ -81,7 +81,7 @@ class LoadTweets(keras.utils.Sequence):
         # Convert list of strings into list of lists of integers
         X_sequences = self.tokenizer.texts_to_sequences(X_text)
         # Truncate and pad input sequences
-        X_pad = sequence.pad_sequences(X_sequences, maxlen=self.max_length)
+        X_pad = sequence.pad_sequences(X_sequences, maxlen=self.vocabulary_size)
 
         if self.split == 'train':
             y = data.target.to_list()

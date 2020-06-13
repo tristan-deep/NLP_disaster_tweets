@@ -21,15 +21,21 @@ if __name__ == '__main__' :
     
     
     """Create model"""
-    max_length = 500
-    max_words = 10000
+    vocabulary_size = 1000
+    max_length = 100
+
     embedding_vecor_length = 32
     lstm_out = 100
-    tokenizer = TokenizeTweets(max_words=max_words)
+    tokenizer = TokenizeTweets(max_words=vocabulary_size)
     
-    train_gen = LoadTweets(tokenizer,split='train', batch_size = 32, shuffle=False, max_words = max_words, max_length=max_length)
-    val_gen = LoadTweets(tokenizer, split='val', batch_size = 32, shuffle=False, max_words = max_words, max_length=max_length)
-    model = create_model(max_words, embedding_vecor_length, max_length, lstm_out)
+    train_gen = LoadTweets(tokenizer, split='train',
+                           batch_size = 32, shuffle=False,
+                           vocabulary_size=vocabulary_size, max_length=max_length)
+    val_gen = LoadTweets(tokenizer, split='val',
+                         batch_size = 32, shuffle=False,
+                         vocabulary_size=vocabulary_size, max_length=max_length)
+    
+    model = create_model(vocabulary_size, embedding_vecor_length, max_length, lstm_out)
     
     
     """## Train model"""
