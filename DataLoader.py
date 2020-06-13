@@ -7,11 +7,23 @@ from pathlib import Path
 from tensorflow.keras.preprocessing import sequence
 from tensorflow.keras.preprocessing.text import Tokenizer
 
+def TokenizeTweets(max_words=10000):
+  data = pd.read_csv(Path('dataset', 'train' + '_set.csv'))
+  list_IDs = list(range(len(data))) 
+  all_text = data.text.to_list()
+
+  # Create Tokenizer Object
+  tokenizer = Tokenizer(num_words=max_words, filters='#$%&()*+-<=>@[\\]^_`{|}~\t\n', lower=False, split=" ")
+
+  # Train the tokenizer to the texts (training data)
+  tokenizer.fit_on_texts(all_text)
+
+  return tokenizer
 
 class LoadTweets(keras.utils.Sequence):
     'Generates data for Keras'
 
-    def __init__(self, split, batch_size=32, n_classes=2, shuffle=True, max_words = 10000, max_length=500):
+    def __init__(self, tokenizer, split, batch_size=32, n_classes=2, shuffle=True, max_words = 10000, max_length=500):
         'Initialization'
         self.batch_size = batch_size
         self.split = split
@@ -21,8 +33,7 @@ class LoadTweets(keras.utils.Sequence):
         self.all_text = self.data.text.to_list()
 
         # Train the tokenizer to the texts
-        self.tokenizer = Tokenizer(num_words=max_words, filters='#$%&()*+-<=>@[\\]^_`{|}~\t\n', lower=False, split=" ")
-        self.tokenizer.fit_on_texts(self.all_text)
+        self.tokenizer = tokenizer
 
         # not using ids but rather rows in csv file for convenience
         self.list_IDs = list(range(len(self.data)))
