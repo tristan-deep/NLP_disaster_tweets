@@ -61,7 +61,7 @@ if __name__ == '__main__' :
     max_length=500
     max_words=10000
     
-    tokenizer = tokenizer_tweets(max_words) # I would prefer this would be just called inside the DataLoader
+    tokenizer = tokenizer_tweets(max_words)
     gen = LoadTweets(tokenizer, split='test', batch_size = test_set_size, shuffle=False, max_length=max_length)
     
     predictions_raw = model.predict(gen)

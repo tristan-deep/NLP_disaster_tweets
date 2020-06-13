@@ -100,8 +100,9 @@ class LoadTweets(keras.utils.Sequence):
 if __name__ == '__main__':
     max_words =10000
     max_length = 500
+    tokenizer = TokenizeTweets(max_words=max_words)
 
-    gen = LoadTweets(split='train', batch_size=1, shuffle=False, max_words = max_words, max_length=max_length)
+    gen = LoadTweets(tokenizer, split='train', batch_size=1, shuffle=False, max_words = max_words, max_length=max_length)
 
     # example that prints all the tweets of the first batch
     batch = gen[0]  # first of len(gen) batches
