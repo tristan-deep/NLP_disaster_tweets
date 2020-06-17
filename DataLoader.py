@@ -31,7 +31,7 @@ class LoadTweets(keras.utils.Sequence):
         self.shuffle = shuffle
         self.data = pd.read_csv(Path('dataset', self.split + '_set.csv'))
         self.all_text = self.data.text.to_list()
-
+        self.max_length = max_length
         # Train the tokenizer to the texts
         self.tokenizer = tokenizer
 
@@ -81,7 +81,7 @@ class LoadTweets(keras.utils.Sequence):
         # Convert list of strings into list of lists of integers
         X_sequences = self.tokenizer.texts_to_sequences(X_text)
         # Truncate and pad input sequences
-        X_pad = sequence.pad_sequences(X_sequences, maxlen=self.vocabulary_size)
+        X_pad = sequence.pad_sequences(X_sequences, maxlen=self.max_length)
 
         if self.split == 'train':
             y = data.target.to_list()
