@@ -98,11 +98,10 @@ class LoadTweets(keras.utils.Sequence):
         return X_pad, y
 
 if __name__ == '__main__':
-    vocabulary_size =10000
-    max_length = 500
+    vocabulary_size =1000
+    max_length = 100
     tokenizer = TokenizeTweets(vocabulary_size)
-
-    gen = LoadTweets(tokenizer, split='train', batch_size=1, shuffle=False, vocabulary_size = vocabulary_size, max_length=max_length)
+    gen = LoadTweets(tokenizer, split='train', batch_size=32, shuffle=False, vocabulary_size = vocabulary_size, max_length=max_length)
 
     # example that prints all the tweets of the first batch
     batch = gen[0]  # first of len(gen) batches
