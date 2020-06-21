@@ -38,7 +38,7 @@ def create_submission(file, predictions, save_to_file=True) :
 
     '''
     
-    test_IDs = pd.read_csv(Path('dataset', 'test.csv'), usecols=['id']).id
+    test_IDs = pd.read_csv(Path('dataset', 'test_set.csv'), usecols=['id']).id
     
     export = pd.DataFrame({'id': test_IDs,
                            'target': predictions}, index=np.arange(test_set_size))
@@ -52,7 +52,7 @@ def create_submission(file, predictions, save_to_file=True) :
 
 if __name__ == '__main__' :
     
-    model_name = 'lstm_embedding-100_out-100-epochs-15.h5'
+    model_name = 'lstm_embedding-32_out-100_epochs-5.h5'
     
     model = import_model(file=model_name)
     
@@ -61,9 +61,9 @@ if __name__ == '__main__' :
     
     # Ideally set to test_set_size. If this does not fit into memory (OOM) try lower. 
     # But has to fit exactly otherwise keras skipps the remainder. batch_size=1 will take forever.
-    batch_size = 1  # = test_set_size
-    max_length=100
-    vocabulary_size=1000
+    batch_size = 1 # = test_set_size
+    max_length=500
+    vocabulary_size=10000
     
     tokenizer = TokenizeTweets(vocabulary_size)
     gen = LoadTweets(tokenizer, split='test', batch_size = test_set_size, shuffle=False, max_length=max_length)
