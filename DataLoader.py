@@ -23,13 +23,17 @@ def TokenizeTweets(vocabulary_size=10000):
 class LoadTweets(keras.utils.Sequence):
     'Generates data for Keras'
 
-    def __init__(self, tokenizer, split, batch_size=32, n_classes=2, shuffle=True, vocabulary_size = 10000, max_length=500):
+    def __init__(self, tokenizer, split, batch_size=32, n_classes=2, shuffle=True, vocabulary_size = 10000, max_length=500, train_on_all=False):
         'Initialization'
         self.batch_size = batch_size
         self.split = split
         self.n_classes = n_classes
         self.shuffle = shuffle
-        self.data = pd.read_csv(Path('dataset', self.split + '_set.csv'))
+        if train_on_all == False :
+            self.data = pd.read_csv(Path('dataset', self.split + '_set.csv'))
+        else :
+            self.data = pd.read_csv(Path('dataset','complete_labelled_dataset.csv'))
+        
         self.all_text = self.data.text.to_list()
         self.max_length = max_length
         # Train the tokenizer to the texts
