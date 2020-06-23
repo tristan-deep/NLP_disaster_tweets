@@ -15,3 +15,17 @@ Participating in [this](https://www.kaggle.com/c/nlp-getting-started/overview) K
 ## CNN Model
 
 <img src="images/model_summary/CNN_model.png" width="300" />
+
+<table>
+  <tr>
+    <td> <img src="images/model_summary/CNN_model.pngg"  alt="1" width = 360px height = 640px ></td>
+
+    <td><img src="images/model_summary/CNN_model.png" alt="2" width = 360px height = 640px></td>
+   </tr> 
+   <tr>
+      <td><img src="images/model_summary/CNN_model.png" alt="3" width = 360px height = 640px></td>
+
+      <td><img src="images/model_summary/CNN_model.png" align="right" alt="4" width = 360px height = 640px>
+  </td>
+  </tr>
+</table>
