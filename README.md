@@ -1,6 +1,9 @@
 # NLP disaster tweets
 Participating in [this](https://www.kaggle.com/c/nlp-getting-started/overview) Kaggle challenge.
 
+
+[TOC]
+
 ## Achieved results
 
 | Model              | Train acc | Val acc | Train loss | Val loss |
@@ -51,15 +54,55 @@ Hparam search conclusions (best model):
 * LSTM out       = 20
 * Optimizer      = Adam
 
-
-### Bidirectional LSTM Model
-
 | LSTM Model         | Bidirectional LSTM Model|
 |--------------------|-----------|
 | <img src="images/model_summary/LSTM_model.png" width="350" />              |  <img src="images/model_summary/Bidirectional_LSTM_model.png" width="350" />|
 
 
 ## Convolutional Models
+### CNN Model
+Model with convolutional modules.
+
+Theoretical motivation:
+Convnets make sense to use for computer vision, and comparing to that, in vision the filters slide over local patches
+in the image, but in NLP we typically use filters that slide over full rows of the vector (in which the words or 
+tokenized words are. 
+
+The conv_filter_size (window size) determines the size of the window that hovers over the input sentence. The idea is
+that the kernel is going to hover over a certain area and apply the convolution operation.
+
+Hparam search conclusions:
+*Tested models with varying amount of Dropout, conv filter size, number of conv modules and number of conv filters. 
+
+Hparam search conclusions (best model):
+* Dropout        = 0.5
+* Optimizer      = Adam
+* Conv_filt_size = 1
+* Conv_num_mods  = 2
+* Conv_num_filts = 16  
+
+Compared to the LSTM model, the overfit reduced by a lot, and overall performance increased. Furthermore, we could conclude that
+a very simple 2 module conv net, is performing better at predicting the NLP sequence data, than a more complex one. 
+
+
+### CNN + LSTM Model
+Model with convolutional modules + LSTM placed after that.
+
+Hparam search conclusions:
+*Tested models with varying amount of Dropout, conv filter size, number of conv modules and number of conv filters.
+ the number of lstm_out = 20, as this was the best value for the separate LSTM model, and otherwise it would increase
+ the amount of models in the hparam search by a lot.
+
+Hparam search conclusions (best model):
+* Dropout        = 0.5
+* Optimizer      = Adam
+* Conv_filt_size = 1
+* Conv_num_mods  = 1
+* Conv_num_filts = 16
+
+This model is performing very similar to the model with just convolutional modules, however it is showing slightly more
+overfit. This can be due to the LSTM modules, like we saw in the LSTM model.
+
 | CNN Model         | CNN + LSTM Model|
 |--------------------|-----------|
 | <img src="images/model_summary/CNN_model.png" width="350" />              |  <img src="images/model_summary/LSTM_CNN_deep_model.png" width="350" />|
