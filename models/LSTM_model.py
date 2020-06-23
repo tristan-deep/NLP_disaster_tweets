@@ -31,12 +31,12 @@ from tensorflow.keras.losses import MSE, categorical_crossentropy, binary_crosse
 from tensorflow.keras.models import Model, Sequential
 from tensorflow.keras.optimizers import Adam
 
-def create_model(max_words=10000, embedding_vecor_length=32, max_length=500, lstm_out=100, dropout = 0.5, optimizer = 'adam', print_summary=True, ):
+def create_model(max_words=10000, embedding_vecor_length=32, max_length=500, lstm_out=100, conv_num_modules = 2, conv_num_filters = 32, conv_filter_size = 1,  dropout = 0.5, optimizer = 'adam', print_summary=True, ):
     model = Sequential()
     model.add(Embedding(max_words, embedding_vecor_length, input_length = max_length))
     model.add(LSTM(lstm_out))
-    model.add(Dense(256))
-    model.add(Activation('relu'))
+    #model.add(Dense(256))
+    #model.add(Activation('relu'))
     model.add(Dropout(dropout))
     model.add(Dense(1, name='out_layer'))
     model.add(Activation('sigmoid'))
