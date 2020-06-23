@@ -16,7 +16,10 @@ During this challenge, we've implemented a variety of different networks. Using 
   * Number of filters (10-64)
 
 ![alt text](images/tensorboard_overview.png)
+(A Tensorboard overview of the most relevant models)
 
+
+The best models, which were selected based on the highest validation accuracy, show the following losses/accuracies:
 
 | Model              | Train acc | Val acc | Train loss | Val loss |
 |--------------------|-----------|---------|------------|----------|
@@ -24,6 +27,8 @@ During this challenge, we've implemented a variety of different networks. Using 
 | Bidirectional LSTM | 0.96      | 0.72    | 0.10       | 2.57     |
 | CNN                | 0.77      | 0.76    | 0.49       | 0.52     |
 | CNN + LSTM         | 0.84      | 0.77    | 0.38       | 0.58     |
+
+The exact model structures / chosen hyperparameters will be discussed below.
 
 
 # Models
