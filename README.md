@@ -49,6 +49,8 @@ further down the road for example
   
     "... and then they got out of the pool"
 
+Credits to, and for more information about bidirectional-LSTM's see: https://medium.com/@raghavaggarwal0089/bi-lstm-bc3d68da8bd0
+
 Hparam search conclusions (best model):
 * Dropout        = 0.5
 * LSTM out       = 20
@@ -57,7 +59,6 @@ Hparam search conclusions (best model):
 | LSTM Model         | Bidirectional LSTM Model|
 |--------------------|-----------|
 | <img src="images/model_summary/LSTM_model.png" width="350" />              |  <img src="images/model_summary/Bidirectional_LSTM_model.png" width="350" />|
-
 
 ## Convolutional Models
 ### CNN Model
@@ -71,8 +72,7 @@ tokenized words are.
 The conv_filter_size (window size) determines the size of the window that hovers over the input sentence. The idea is
 that the kernel is going to hover over a certain area and apply the convolution operation.
 
-Hparam search conclusions:
-*Tested models with varying amount of Dropout, conv filter size, number of conv modules and number of conv filters. 
+For more information about CNN's with NLP see: http://www.wildml.com/2015/11/understanding-convolutional-neural-networks-for-nlp/
 
 Hparam search conclusions (best model):
 * Dropout        = 0.5
@@ -87,6 +87,11 @@ a very simple 2 module conv net, is performing better at predicting the NLP sequ
 
 ### CNN + LSTM Model
 Model with convolutional modules + LSTM placed after that.
+
+Theorethical motivation:
+Convolutional neural networks can be powerful feature extractors (and they have especially proven their effectiveness in computer vision related tasks), however we also expect them to be able to extract features from our tokenized sequence of words, which is a sentence. 
+
+The features that the CNN has extracted are then input to a LSTM 
 
 Hparam search conclusions:
 *Tested models with varying amount of Dropout, conv filter size, number of conv modules and number of conv filters.
