@@ -129,3 +129,7 @@ overfit. This can be due to the LSTM modules, like we saw in the LSTM model.
 |--------------------|-----------|
 | <img src="images/model_summary/CNN_model.png" width="350" />              |  <img src="images/model_summary/LSTM_CNN_deep_model.png" width="350" />|
 
+## Layers in the model
+### Embedding layer
+This layer, with respect to other layers, creates a respectively small vector in which a word is represented. The placing of the word within the vector space is based on the words which surround the word when it's used. The quality of embedding increases for every iteration, as it's executed every iteration.
+
