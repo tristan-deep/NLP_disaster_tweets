@@ -132,4 +132,6 @@ overfit. This can be due to the LSTM modules, like we saw in the LSTM model.
 ## Layers in the model
 ### Embedding layer
 This layer, with respect to other layers, creates a respectively small vector in which a word is represented. The placing of the word within the vector space is based on the words which surround the word when it's used. The quality of embedding increases for every iteration, as it's executed every iteration.
+In our case the Embedding layer converges which converted a input vocabulary of 100 words into vector space consisting of 100 vectors.
 
+###
