@@ -14,4 +14,4 @@ Participating in [this](https://www.kaggle.com/c/nlp-getting-started/overview) K
 # Models
 ## CNN Model
 
-![Alt text](images/model_summary/CNN_model.png?raw=true "Title")
+<img src="images/model_summary/CNN_model.png" width="500" />
