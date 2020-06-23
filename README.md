@@ -1,8 +1,8 @@
 # NLP disaster tweets
 Participating in [this](https://www.kaggle.com/c/nlp-getting-started/overview) Kaggle challenge.
 
+##Achieved results
 
-#Achieved 
 | Model              | Train acc | Val acc | Train loss | Val loss |
 |--------------------|-----------|---------|------------|----------|
 | LSTM               | 0.95      | 0.72    | 0.13       | 1.91     |
