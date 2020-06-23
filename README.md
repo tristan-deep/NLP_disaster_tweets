@@ -16,11 +16,11 @@ Participating in [this](https://www.kaggle.com/c/nlp-getting-started/overview) K
 
 | LSTM Model         | Bidirectional LSTM Model|
 |--------------------|-----------|
-| <img src="images/model_summary/CNN_model.png" width="350" />              |  <img src="images/model_summary/CNN_model.png" width="350" />|
+| <img src="images/model_summary/LSTM_model.png" width="350" />              |  <img src="images/model_summary/Bidirectional_LSTM_model.png" width="350" />|
 
 
 ## Convolutional Models
 | CNN Model         | CNN + LSTM Model|
 |--------------------|-----------|
-| <img src="images/model_summary/CNN_model.png" width="350" />              |  <img src="images/model_summary/CNN_model.png" width="350" />|
+| <img src="images/model_summary/CNN_model.png" width="350" />              |  <img src="images/model_summary/LSTM_CNN_deep_model.png" width="350" />|
 
