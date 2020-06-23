@@ -11,7 +11,7 @@ import models.Bidirectional_LSTM_model as Bidirectional_LSTM_model
 import models.CNN_model as CNN_model
 import models.LSTM_CNN_deep_model as LSTM_CNN_deep_model
 import models.LSTM_model as LSTM_model
-
+import models.LSTM_modelv2 as LSTM_modelv2
 
 from tensorboard.plugins.hparams import api as hp
 
@@ -22,7 +22,7 @@ if __name__ == '__main__' :
     vocabulary_size = 1000
     max_length = 100
 
-    embedding_vecor_length = 100
+    embedding_vecor_length = 10
     tokenizer = TokenizeTweets(vocabulary_size=vocabulary_size)
     
     train_gen = LoadTweets(tokenizer, split='train',
