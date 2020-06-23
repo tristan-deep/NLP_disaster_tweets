@@ -2,9 +2,21 @@
 Participating in [this](https://www.kaggle.com/c/nlp-getting-started/overview) Kaggle challenge.
 
 
-[TOC]
-
 ## Achieved results
+
+During this challenge, we've implemented a variety of different networks. Using Keras and Tensorboard, we tried to sweep over the relevant parameters of the network. We tried experimenting with the following hyperparameters:
+* General
+  * Dropout (between 0.0 and 0.50)
+  * Optimizer (Adam and RMSprop)
+* LSTM Models
+  * Dimensionality of the output space (10-200)
+* CNN Modles
+  * Number of modules (1-3)
+  * Filter size (1-5)
+  * Number of filters (10-64)
+
+![alt text](images/tensorboard_overview.png)
+
 
 | Model              | Train acc | Val acc | Train loss | Val loss |
 |--------------------|-----------|---------|------------|----------|
