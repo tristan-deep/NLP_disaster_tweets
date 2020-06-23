@@ -14,4 +14,4 @@ Participating in [this](https://www.kaggle.com/c/nlp-getting-started/overview) K
 # Models
 ## CNN Model
 
-<img src="images/model_summary/CNN_model.png" width="500" />
+<img src="images/model_summary/CNN_model.png" width="300" />
