@@ -21,12 +21,12 @@ During this challenge, we've implemented a variety of different networks. Using 
 
 The best models, which were selected based on the highest validation accuracy, show the following losses/accuracies:
 
-| Model              | Train acc | Val acc | Train loss | Val loss |
-|--------------------|-----------|---------|------------|----------|
-| LSTM               | 0.95      | 0.72    | 0.13       | 1.91     |
-| Bidirectional LSTM | 0.96      | 0.72    | 0.10       | 2.57     |
-| CNN                | 0.77      | 0.76    | 0.49       | 0.52     |
-| CNN + LSTM         | 0.84      | 0.77    | 0.38       | 0.58     |
+| Model              | Train acc | Val acc | Train loss | Val loss | F1 score |
+|--------------------|-----------|---------|------------|----------|----------|
+| LSTM               | 0.95      | 0.72    | 0.13       | 1.91     | 0.526    |
+| Bidirectional LSTM | 0.96      | 0.72    | 0.10       | 2.57     | 0.490    |
+| CNN                | 0.77      | 0.76    | 0.49       | 0.52     | 0.529    |
+| CNN + LSTM         | 0.84      | 0.77    | 0.38       | 0.58     | 0.473    |
 
 The exact model structures / chosen hyperparameters will be discussed below.
 
@@ -94,7 +94,7 @@ For more information about CNN's with NLP see: http://www.wildml.com/2015/11/und
 Hparam search conclusions (best model):
 * Dropout        = 0.5
 * Optimizer      = Adam
-* Conv_filt_size = 1
+* Conv_filt_size = 2
 * Conv_num_mods  = 2
 * Conv_num_filts = 16  
 
@@ -129,3 +129,17 @@ overfit. This can be due to the LSTM modules, like we saw in the LSTM model.
 |--------------------|-----------|
 | <img src="images/model_summary/CNN_model.png" width="350" />              |  <img src="images/model_summary/LSTM_CNN_deep_model.png" width="350" />|
 
+## Layers in the model
+### Embedding layer
+This layer, with respect to other layers, creates a respectively small vector in which a word is represented. The placing of the word within the vector space is based on the words which surround the word when it's used. The quality of embedding increases for every iteration, as it's executed every iteration.
+In our case the Embedding layer converges which converted a input vocabulary of 100 words into vector space consisting of 100 vectors.
+
+### Batch normalization
+
+### Max Pooling (1D)
+
+### Dropout layer
+
+### Dense layer
+
+### Activation layer
