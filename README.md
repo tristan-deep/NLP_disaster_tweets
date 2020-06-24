@@ -21,12 +21,12 @@ During this challenge, we've implemented a variety of different networks. Using 
 
 The best models, which were selected based on the highest validation accuracy, show the following losses/accuracies:
 
-| Model              | Train acc | Val acc | Train loss | Val loss |
-|--------------------|-----------|---------|------------|----------|
-| LSTM               | 0.95      | 0.72    | 0.13       | 1.91     |
-| Bidirectional LSTM | 0.96      | 0.72    | 0.10       | 2.57     |
-| CNN                | 0.77      | 0.76    | 0.49       | 0.52     |
-| CNN + LSTM         | 0.84      | 0.77    | 0.38       | 0.58     |
+| Model              | Train acc | Val acc | Train loss | Val loss | F1 score |
+|--------------------|-----------|---------|------------|----------|----------|
+| LSTM               | 0.95      | 0.72    | 0.13       | 1.91     | 0.526    |
+| Bidirectional LSTM | 0.96      | 0.72    | 0.10       | 2.57     | 0.490    |
+| CNN                | 0.77      | 0.76    | 0.49       | 0.52     | 0.529    |
+| CNN + LSTM         | 0.84      | 0.77    | 0.38       | 0.58     | 0.473    |
 
 The exact model structures / chosen hyperparameters will be discussed below.
 
