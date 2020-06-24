@@ -94,7 +94,7 @@ For more information about CNN's with NLP see: http://www.wildml.com/2015/11/und
 Hparam search conclusions (best model):
 * Dropout        = 0.5
 * Optimizer      = Adam
-* Conv_filt_size = 1
+* Conv_filt_size = 2
 * Conv_num_mods  = 2
 * Conv_num_filts = 16  
 
